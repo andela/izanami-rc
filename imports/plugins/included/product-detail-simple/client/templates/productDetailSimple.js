@@ -24,6 +24,6 @@ Template.disquss.helpers({
     const s = document.createElement("script");
     s.src = "https://izanami-rc.disqus.com/embed.js";
     s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
+    (document.head || document.body).appendChild(s);
   }
 });
