@@ -21,9 +21,8 @@ Template.productDetailSimpleToolbar.helpers({
 
 Template.disquss.helpers({
   getDisqus() {
-    const d = document;
-    const s = d.createElement("script");
-    s.src = "//http-localhost-3000-13.disqus.com/embed.js";
+    const s = document.createElement("script");
+    s.src = "https://izanami-rc.disqus.com/embed.js";
     s.setAttribute("data-timestamp", +new Date());
     (d.head || d.body).appendChild(s);
   }
