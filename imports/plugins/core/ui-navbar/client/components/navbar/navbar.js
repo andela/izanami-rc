@@ -2,7 +2,8 @@ import { FlatButton } from "/imports/plugins/core/ui/client/components";
 import { NotificationContainer } from "/imports/plugins/included/notifications/client/containers";
 import { Reaction } from "/client/api";
 import { Tags } from "/lib/collections";
-
+import { Accounts } from "/lib/collections/collections";
+import { startTour, updateTour } from "/imports/plugins/included/intro-js/client/index.js";
 
 Template.CoreNavigationBar.onCreated(function () {
   this.state = new ReactiveDict();
@@ -13,6 +14,10 @@ Template.CoreNavigationBar.onCreated(function () {
   } else {
     this.state.set("searchEnabled", false);
   }
+});
+
+Template.CoreNavigationBar.onRendered(() => {
+  updateTour(startTour);
 });
 
 /**
@@ -39,10 +44,21 @@ Template.CoreNavigationBar.events({
   "click .notification-icon": function () {
     $("body").css("overflow", "hidden");
     $("#notify-dropdown").focus();
+  },
+  "click .tour-btn": () => {
+    startTour(true);
   }
 });
 
 Template.CoreNavigationBar.helpers({
+  TourButtonComponent() {
+    return {
+      component: FlatButton,
+      icon: "fa fa-car",
+      kind: "flat"
+    };
+  },
+
   isSearchEnabled() {
     const instance = Template.instance();
     return instance.state.get("searchEnabled");
