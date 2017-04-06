@@ -4,13 +4,10 @@ export default () => {
   // Global API configuration
   const Api = new Restivus({
     useDefaultAuth: true,
-    prettyJson: true,
-    defaultHeaders: {
-      "Content-Type": "application/json"
-    }
+    prettyJson: true
   });
 
-  const getApiOptions = (collectionName) => {
+  const makeRestful = (collectionName) => {
     return {
       routeOptions: {
         authRequired: true
@@ -20,9 +17,9 @@ export default () => {
         get: {
           authRequired: false,
           action() {
-            const allRecords = collectionName.find();
-            if (allRecords) {
-              return { statusCode: 201, status: "success", data: allRecords };
+            const records = collectionName.find();
+            if (records) {
+              return { statusCode: 201, status: "success", data: records };
             }
             return {
               statusCode: 404,
@@ -35,9 +32,9 @@ export default () => {
         // POST into a collection
         post: {
           action() {
-            const isInserted = collectionName.insert(this.bodyParams);
-            if (isInserted) {
-              return { statusCode: 201, status: "success", data: isInserted };
+            const toInsert = collectionName.insert(this.bodyParams);
+            if (toInsert) {
+              return { statusCode: 201, status: "success", data: toInsert };
             }
 
             return { status: "fail", message: "error" };
@@ -47,11 +44,11 @@ export default () => {
         // UPDATE a collection
         put: {
           action() {
-            const isUpdated = collectionName.update(this.urlParams.id, {
+            const toUpdate = collectionName.update(this.urlParams.id, {
               $set: this.bodyParams
             });
-            if (isUpdated) {
-              return { statusCode: 201, status: "success", data: isUpdated };
+            if (toUpdate) {
+              return { statusCode: 201, status: "success", data: toUpdate };
             }
             return { status: "fail", message: "record not found" };
           }
@@ -60,9 +57,9 @@ export default () => {
         // DELETE an record in a collection
         delete: {
           action() {
-            const isDeleted = collectionName.remove(this.urlParams.id);
+            const toDelete = collectionName.remove(this.urlParams.id);
 
-            if (isDeleted) {
+            if (toDelete) {
               return { status: "success", data: { message: "record deleted" } };
             }
             return { status: "fail", message: "record not found" };
@@ -72,10 +69,10 @@ export default () => {
     };
   };
 
-  Api.addCollection(Shops, getApiOptions(Shops));
-  Api.addCollection(Products, getApiOptions(Products));
-  Api.addCollection(Orders, getApiOptions(Orders));
-  Api.addCollection(Cart, getApiOptions(Cart));
-  Api.addCollection(Accounts, getApiOptions(Accounts));
-  Api.addCollection(Emails, getApiOptions(Emails));
+  Api.addCollection(Shops, makeRestful(Shops));
+  Api.addCollection(Products, makeRestful(Products));
+  Api.addCollection(Orders, makeRestful(Orders));
+  Api.addCollection(Cart, makeRestful(Cart));
+  Api.addCollection(Accounts, makeRestful(Accounts));
+  Api.addCollection(Emails, makeRestful(Emails));
 };
