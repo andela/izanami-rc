@@ -28,13 +28,6 @@ export default () => {
             };
           }
         },
-        // search for products
-        get: {
-          authRequired: false,
-          action() {
-            const query =
-          }
-        }
         // POST into a collection
         post: {
           action() {
