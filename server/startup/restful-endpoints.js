@@ -7,7 +7,7 @@ export default () => {
     prettyJson: true
   });
 
-  const makeRestful = (collectionName) => {
+  const restfulEndpoints = (collectionName) => {
     return {
       routeOptions: {
         authRequired: true
@@ -28,7 +28,13 @@ export default () => {
             };
           }
         },
-
+        // search for products
+        get: {
+          authRequired: false,
+          action() {
+            const query =
+          }
+        }
         // POST into a collection
         post: {
           action() {
@@ -69,10 +75,10 @@ export default () => {
     };
   };
 
-  Api.addCollection(Shops, makeRestful(Shops));
-  Api.addCollection(Products, makeRestful(Products));
-  Api.addCollection(Orders, makeRestful(Orders));
-  Api.addCollection(Cart, makeRestful(Cart));
-  Api.addCollection(Accounts, makeRestful(Accounts));
-  Api.addCollection(Emails, makeRestful(Emails));
+  Api.addCollection(Shops, restfulEndpoints(Shops));
+  Api.addCollection(Products, restfulEndpoints(Products));
+  Api.addCollection(Orders, restfulEndpointsl(Orders));
+  Api.addCollection(Cart, restfulEndpointsl(Cart));
+  Api.addCollection(Accounts, restfulEndpointsl(Accounts));
+  Api.addCollection(Emails, restfulEndpointsl(Emails));
 };
