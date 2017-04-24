@@ -76,7 +76,7 @@ class Switch extends Component {
     });
 
     return (
-      <label className={baseClassName}>
+      <label className={baseClassName + " edit-button"}>
         <input
           checked={this.props.checked}
           onChange={this.handleChange}

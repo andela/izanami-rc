@@ -262,3 +262,21 @@ html:not(.rtl) .rui.navbar .languages .dropdown-menu {
 .rui.navbar .search:hover button {
   outline: none;
 }
+
+.rui.navbar .tour-btn {
+  .display(flex);
+  .align-items(center);
+  .flex(0 0 auto);
+  height: @navbar-height;
+  padding: 0px @navbar-padding-vertical;
+  cursor: pointer;
+}
+
+.rui.navbar .tour-btn:hover {
+  background-color: @navbar-default-toggle-icon-bar-bg;
+  border-color: @navbar-default-toggle-border-color;
+}
+
+.rui.navbar .tour-btn:hover button {
+  outline: none;
+}
