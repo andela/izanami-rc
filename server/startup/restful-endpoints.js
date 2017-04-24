@@ -70,8 +70,8 @@ export default () => {
 
   Api.addCollection(Shops, restfulEndpoints(Shops));
   Api.addCollection(Products, restfulEndpoints(Products));
-  Api.addCollection(Orders, restfulEndpointsl(Orders));
-  Api.addCollection(Cart, restfulEndpointsl(Cart));
-  Api.addCollection(Accounts, restfulEndpointsl(Accounts));
-  Api.addCollection(Emails, restfulEndpointsl(Emails));
+  Api.addCollection(Orders, restfulEndpoints(Orders));
+  Api.addCollection(Cart, restfulEndpoints(Cart));
+  Api.addCollection(Accounts, restfulEndpoints(Accounts));
+  Api.addCollection(Emails, restfulEndpoints(Emails));
 };
