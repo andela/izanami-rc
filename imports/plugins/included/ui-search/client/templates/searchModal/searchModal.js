@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import _ from "lodash";
 import { Template } from "meteor/templating";
 import { ProductSearch, Tags, OrderSearch, AccountSearch } from "/lib/collections";
