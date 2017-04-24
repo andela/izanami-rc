@@ -210,6 +210,7 @@ class PublishControls extends Component {
 
     return (
       <Button
+        className="publish-button"
         bezelStyle="outline"
         disabled={this.hasChanges === false}
         label="Publish"
@@ -276,6 +277,7 @@ class PublishControls extends Component {
 
       return (
         <FlatButton
+          className="eye-button"
           i18nKeyTooltip={i18nKeyTooltip}
           icon="fa fa-eye-slash"
           onIcon="fa fa-eye"
@@ -295,6 +297,7 @@ class PublishControls extends Component {
   renderUndoButton() {
     return (
       <FlatButton
+        className="discard-button"
         disabled={this.hasChanges === false}
         tooltip="Discard Changes"
         i18nKeyTooltip="revisions.discardChanges"
@@ -308,6 +311,7 @@ class PublishControls extends Component {
   renderArchiveButton() {
     return (
       <FlatButton
+        className="archive-button"
         tooltip="Archive"
         i18nKeyTooltip="app.archive"
         icon={"fa fa-archive"}
