@@ -166,8 +166,6 @@ Template.searchModal.onCreated(function () {
           _id: { $in: hashtags }
         }).fetch();
         this.state.set("tagSearchResults", tagResults);
-
-        // TODO: Do we need this?
         this.state.set("accountSearchResults", "");
         this.state.set("orderSearchResults", "");
       }
