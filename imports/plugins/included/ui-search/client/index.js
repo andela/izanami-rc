@@ -1,4 +1,5 @@
 // Search Modal
+/* jshint esversion: 6 */
 import "./templates/searchModal/searchModal.html";
 import "./templates/searchModal/searchModal.js";
 import "./templates/searchModal/searchInput.html";
