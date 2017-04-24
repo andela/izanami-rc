@@ -14,16 +14,16 @@ Reaction.registerPackage({
     // Dashboard card
     {
       provides: "dashboard",
-      label: "Paystack Payment",
+      label: "Paystack Payment Method",
       description: "Paystack payment provider",
       icon: "fa fa-credit-card-alt",
-      priority: 3,
+      priority: 1,
       container: "paymentMethod"
     },
 
     // Settings panel
     {
-      label: "Paystack Payment Settings", // this key (minus spaces) is used for translations
+      label: "Paystack Payment Settings",
       route: "/dashboard/paystack",
       provides: "settings",
       container: "dashboard",
