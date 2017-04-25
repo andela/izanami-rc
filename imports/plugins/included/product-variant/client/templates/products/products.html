@@ -36,15 +36,15 @@
 
 
  <template name="socialContentTimeline">
-  <div class="col-xs-12" style="z-index:10; padding:20px 60px;">
+  <div class="col-xs-12 social-timelines" style="z-index:10; padding:20px 60px;">
      {{#if facebook}}
-     <div class="col-sm-5">
+     <div class="col-sm-5" id="facebook-timeline">
        <iframe src={{facebook}} style="border:none;overflow:auto;width:100%;height:400px" allowTransparency="true"></iframe>
      </div>
      {{/if}}
      {{#if twitter}}
      <div class="col-sm-2"></div>
-     <div class="col-sm-5" style="height: 400px; overflow-y: scroll;">
+     <div class="col-sm-5 twitter-timeline" style="height: 400px; overflow-y: scroll;">
        <a class="twitter-timeline" href="{{twitter}}">Tweets by {{twitter}}</a>
 
   <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
