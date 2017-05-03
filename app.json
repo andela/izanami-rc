@@ -5,10 +5,7 @@
   "env": {
     "BUILDPACK_CLEAR_CACHE": "http://izanami-rc.herokuapp.com",
     "MONGODB_URI": "mongodb://admin:izanami-rc@ds141088.mlab.com:41088/izanami-rc",
-    "ROOT_URL": "http://izanami-rc.herokuapp.com",
-    "SMS": {
-			"required": true
-		}
+    "ROOT_URL": "http://izanami-rc.herokuapp.com"
   },
   "formation": {
   },
