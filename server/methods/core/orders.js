@@ -392,14 +392,6 @@ export const methods = {
     const customerPhoneNumber = order.billing[0].address.phone;
 
     const shop = Shops.findOne(order.shopId);
-    const shopContact = shop.addressBook[0];
-
-    //  Loop through orders to get vendor information and send notification to them
-    const numberOfItems = order.items.length;
-    let products;
-    for (let i = 0; i < numberOfItems; i += 1) {
-      products += ` ${order.items[i].title},`;
-    }
 
     const customerMessageContent = {
       to: customerPhoneNumber,
