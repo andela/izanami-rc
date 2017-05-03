@@ -52,7 +52,6 @@ describe("stripe/refunds/list", () => {
       url: "/v1/refunds"
     };
     sandbox.stub(StripeApi.methods.listRefunds, "call", () => stripeRefundListResult);
-    // spyOn(StripeApi.methods.listRefunds, "call").and.returnValue(stripeRefundListResult);
 
     let refundListResult = null;
     let refundListError = null;
@@ -60,8 +59,8 @@ describe("stripe/refunds/list", () => {
       refundListResult = result;
       refundListError = error;
 
-      expect(refundListError).to.be.undefined;
-      expect(refundListResult).to.not.be.undefined;
+      expect(refundListError).to.be.equal(undefined);
+      expect(refundListResult).to.not.be.equal(undefined);
       expect(refundListResult.length).to.equal(1);
       expect(refundListResult[0].type).to.equal("refund");
       expect(refundListResult[0].amount).to.equal(19.99);
