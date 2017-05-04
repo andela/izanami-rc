@@ -61,3 +61,5 @@ BrowserPolicy.content.allowOriginForAll("fonts.gstatic.com");
 
 BrowserPolicy.content.allowOriginForAll("enginex.kadira.io");
 BrowserPolicy.content.allowOriginForAll("*.stripe.com");
+BrowserPolicy.content.allowOriginForAll("http://cdn.ckeditor.com");
+BrowserPolicy.content.allowOriginForAll("https://code.jquery.com/");
