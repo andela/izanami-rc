@@ -7,11 +7,5 @@
     "REACTION_EMAIL": ""
   },
   "REACTION_LOG_LEVEL": "info",
-  "public": {},
-  "SMS": {
-    "OWNEREMAIL": "oluwaseun.owonikoko@andela.com",
-    "SUBACCT": "REACTION COMMERCE",
-    "SUBACCTPWD": "reaction",
-    "URL": "http://www.smslive247.com/http/index.aspx"
-  }
+  "public": {}
 }
