@@ -102,3 +102,4 @@ twitter-config-ui
 nimble:restivus
 visudare:disqus
 mizzao:autocomplete
+jss:bootstrap-multi-select@=0.0.2

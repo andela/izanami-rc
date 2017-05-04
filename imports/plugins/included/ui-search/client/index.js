@@ -1,10 +1,12 @@
 // Search Modal
+/* jshint esversion: 6 */
 import "./templates/searchModal/searchModal.html";
 import "./templates/searchModal/searchModal.js";
 import "./templates/searchModal/searchInput.html";
 import "./templates/searchModal/searchInput.js";
 import "./templates/searchModal/searchTypeToggle.html";
 import "./templates/searchModal/searchResults.html";
+import "./styles/common.css";
 
 // Product Search
 import "./templates/productSearch/productResults.html";
@@ -16,6 +18,8 @@ import "./templates/productSearch/content.html";
 import "./templates/productSearch/content.js";
 import "./templates/productSearch/notice.html";
 import "./templates/productSearch/notice.js";
+import "./templates/productSearch/productSearchSort.html";
+import "./templates/productSearch/productVendorFilter.html";
 
 // Order Search
 import "./templates/orderSearch/orderResults.html";
