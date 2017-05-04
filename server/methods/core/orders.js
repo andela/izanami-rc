@@ -403,7 +403,9 @@ export const methods = {
     let refundTotal = 0;
 
     _.each(refundResult, function (item) {
-      refundTotal += parseFloat(item.amount);
+      if(item && item.amount) {
+        refundTotal += parseFloat(item.amount);
+      }
     });
 
     // Get user currency formatting from shops collection, remove saved rate
