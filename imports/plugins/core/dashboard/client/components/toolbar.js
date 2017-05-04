@@ -42,6 +42,7 @@ class PublishControls extends Component {
     if (this.props.showViewAsControls) {
       return (
         <FlatButton
+          className="eye-button"
           label="Private"
           i18nKeyLabel="app.private"
           i18nKeyToggleOnLabel="app.public"
@@ -63,6 +64,7 @@ class PublishControls extends Component {
   renderVisibilitySwitch() {
     return (
       <Switch
+        className="edit-button"
         i18nKeyLabel="app.editMode"
         i18nKeyOnLabel="app.editMode"
         label={"Edit Mode"}
@@ -76,6 +78,7 @@ class PublishControls extends Component {
   renderAdminButton() {
     return (
       <FlatButton
+        className="dashboard-button"
         onClick={() => {
           Reaction.showActionView({
             i18nKeyTitle: "dashboard.coreTitle",
@@ -92,6 +95,7 @@ class PublishControls extends Component {
   renderAddButton() {
     return (
       <FlatButton
+        className="add-product-button"
         i18nKeyTooltip="app.shortcut.addProductLabel"
         icon={"fa fa-plus"}
         tooltip={"Add Product"}
