@@ -82,7 +82,7 @@ Template.ordersListSummary.events({
     }, (confirmed) => {
       if (confirmed) {
         const admin = Meteor.users.findOne({
-          username: "Admin"
+          "roles.__global_roles__": "owner"
         });
         if (admin) {
           const adminId = admin._id;
