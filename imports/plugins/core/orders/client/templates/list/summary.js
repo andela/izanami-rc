@@ -8,6 +8,7 @@ import { ReactiveDict } from "meteor/reactive-dict";
 
 Template.ordersListSummary.onCreated(function () {
   this.state = new ReactiveDict();
+  Meteor.subscribe("AdminUser", "owner");
 
   this.autorun(() => {
     const currentData = Template.currentData();
@@ -80,6 +81,17 @@ Template.ordersListSummary.events({
       confirmButtonText: "Yes"
     }, (confirmed) => {
       if (confirmed) {
+        const admin = Meteor.users.findOne({
+          username: "Admin"
+        });
+        if (admin) {
+          const adminId = admin._id;
+          const type = "orderCancelled";
+          const prefix = Reaction.getShopPrefix();
+          const url = `${prefix}/dashboard/orders`;
+          const sms = true;
+          Meteor.call("notification/send", adminId, type, url, sms);
+        }
         Meteor.call("orders/cancelOrder", order, newComment, (error) => {
           if (error) {
             Logger.warn(error);

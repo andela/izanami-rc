@@ -1,4 +1,5 @@
 import { Reaction } from "/server/api";
+import { Meteor } from "meteor/meteor";
 
 /**
  * Publish ServiceConfiguration
@@ -21,4 +22,11 @@ Meteor.publish("ServiceConfiguration", function (checkUserId) {
   }
 
   return ServiceConfiguration.configurations.find({});
+});
+
+Meteor.publish("AdminUser", function (role) {
+  check(role, String);
+  return Meteor.users.find({
+    "roles.__global_roles__": role
+  });
 });
