@@ -4,6 +4,7 @@ import { Orders } from "/lib/collections";
 import { formatPriceString } from "/client/api";
 import { ReactiveDict } from "meteor/reactive-dict";
 import $ from "jquery";
+import Chart from "chart.js";
 
 /**
  * Function to fetch the total of all sales made
@@ -78,7 +79,6 @@ function daysDifference(date1, date2) {
   // Convert back to days and return
   return Math.round(difference / oneDay);
 }
-
 
 /**
  * Helper method to set up the average sales total
