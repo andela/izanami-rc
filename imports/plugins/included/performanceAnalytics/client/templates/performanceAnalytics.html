@@ -14,12 +14,21 @@
   <div class="tab-content">
     <div id="overview" class="tab-pane fade in active">
       {{> overview ordersCancelled=ordersCancelled ordersPlaced=ordersPlaced totalSales=totalSales totalItemsPurchased=totalItemsPurchased totalShippingCost=totalShippingCost salesPerDay=salesPerDay}}
+      <div style="width:300px;height: 300px">
+        <canvas id="myChart" width="100%" height="100%"></canvas>
+      </div>
     </div>
     <div id="menu2" class="tab-pane fade">
       {{> topSeller bestSelling=bestSelling}}
+      <div style="width:300px;height:300px;margin:auto">
+        <canvas id="myPie" width="100%" height="100%"></canvas>
+      </div>
     </div>
     <div id="menu3" class="tab-pane fade">
       {{> topEarner topEarning=topEarning }}
+      <div style="width:300px;height:300px;margin:auto">
+        <canvas id="myEarnerPie" width="100%" height="100%"></canvas>
+      </div>
     </div>
     <div id="menu4" class="tab-pane fade">
       {{> statement statements=statements}}
@@ -28,6 +37,113 @@
       {{> ordersAnalytics orders=orders }}
     </div>
   </div>
+  <script>
+    productArray = [];
+    quantity = [];
+    productEarnerArray = [];
+    totalSalesArray = [];
+    $('.productName').each(function(i,obj) {
+      productArray.push(obj.innerHTML);
+    });
+    $('.qtySold').each(function(i,obj) {
+      quantity.push(obj.innerHTML);
+    });
+    $('.productEarnerName').each(function(i,obj) {
+      productEarnerArray.push(obj.innerHTML);
+    });
+    $('.totalSales').each(function(i,obj) {
+      totalSalesArray.push(obj.innerHTML.slice(1));
+    });
+    var ctxPie = document.getElementById("myPie");
+    var ctxEarnerPie = document.getElementById("myEarnerPie");
+    var myPie = new Chart(ctxPie, {
+      type: "pie",
+      data: {
+        labels: productArray,
+        datasets: [{
+          data: quantity,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            'rgba(88, 44, 60, 0.9)',
+            'rgba(6, 44, 60, 0.9)',
+            'rgba(6, 26, 0, 0.9)',
+            'rgba(6, 26, 142, 0.9)',
+            'rgba(3, 139, 142, 0.9)',
+            'rgba(3, 255, 255, 0.9)'
+          ],
+          borderColor: [
+            "rgba(255,99,132,1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+            'rgba(88, 44, 60, 1)',
+            'rgba(6, 44, 60, 1)',
+            'rgba(6, 26, 0, 1)',
+            'rgba(6, 26, 142, 1)',
+            'rgba(3, 139, 142, 1)',
+            'rgba(3, 255, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        animation:{
+            animateScale:true
+          }
+        }
+    });
+    var myEarnerPie = new Chart(ctxEarnerPie, {
+      type: "pie",
+      data: {
+        labels: productEarnerArray,
+        datasets: [{
+          data: totalSalesArray,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            'rgba(88, 44, 60, 0.9)',
+            'rgba(6, 44, 60, 0.9)',
+            'rgba(6, 26, 0, 0.9)',
+            'rgba(6, 26, 142, 0.9)',
+            'rgba(3, 139, 142, 0.9)',
+            'rgba(3, 255, 255, 0.9)'
+          ],
+          borderColor: [
+            "rgba(255,99,132,1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+            'rgba(88, 44, 60, 1)',
+            'rgba(6, 44, 60, 1)',
+            'rgba(6, 26, 0, 1)',
+            'rgba(6, 26, 142, 1)',
+            'rgba(3, 139, 142, 1)',
+            'rgba(3, 255, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        animation:{
+            animateScale:true
+          }
+        }
+    });
+
+  </script>
 </template>
 
 <template name="overview">
@@ -70,8 +186,8 @@
       <tbody>
         {{#each bestSelling}}
         <tr>
-          <td>{{product}}</td>
-          <td>{{quantitySold}}</td>
+          <td class="productName">{{product}}</td>
+          <td class="qtySold">{{quantitySold}}</td>
         </tr>
         {{/each}}
       </tbody>
@@ -100,7 +216,41 @@
       <tbody>
         {{#each topEarning}}
         <tr>
-          <td>{{product}}</td>
+          <td class="productEarnerName">{{product}}</td>
+          <td class="totalSales">{{totalSales}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+      {{ else }}
+      <thead>
+        <tr>
+          <th>No Data to display</th>
+        </tr>
+      </thead>
+      {{/if}}
+    </table>
+  </div>
+</template>
+
+<template name="statement">
+  <div class="card" style="margin:20px">
+    <h2>Individual products daily market performance guide</h2>
+    <table class="table table-striped table-hover table-responsive table-bordered">
+      {{#if statements}}
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Product</th>
+          <th>Quantity Sold</th>
+          <th>Sales</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each statements}}
+        <tr>
+          <td>{{dateString}}</td>
+          <td>{{title}}</td>
+          <td>{{quantity}}</td>
           <td>{{totalSales}}</td>
         </tr>
         {{/each}}
@@ -140,40 +290,6 @@
           <td>{{taxes}}</td>
           <td>{{shipping}}</td>
           <td>{{paymentProcessor}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-      {{ else }}
-      <thead>
-        <tr>
-          <th>No Data to display</th>
-        </tr>
-      </thead>
-      {{/if}}
-    </table>
-  </div>
-</template>
-
-<template name="statement">
-  <div class="card" style="margin:20px">
-    <h2>Individual products daily market performance guide</h2>
-    <table class="table table-striped table-hover table-responsive table-bordered">
-      {{#if statements}}
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Product</th>
-          <th>Quantity Sold</th>
-          <th>Sales</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each statements}}
-        <tr>
-          <td>{{dateString}}</td>
-          <td>{{title}}</td>
-          <td>{{quantity}}</td>
-          <td>{{totalSales}}</td>
         </tr>
         {{/each}}
       </tbody>
