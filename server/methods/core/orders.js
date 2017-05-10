@@ -458,7 +458,7 @@ export const methods = {
     let refundTotal = 0;
 
     _.each(refundResult, function (item) {
-      if(item && item.amount) {
+      if (item && item.amount) {
         refundTotal += parseFloat(item.amount);
       }
     });
