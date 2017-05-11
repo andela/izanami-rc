@@ -14,8 +14,13 @@
   <div class="tab-content">
     <div id="overview" class="tab-pane fade in active">
       {{> overview ordersCancelled=ordersCancelled ordersPlaced=ordersPlaced totalSales=totalSales totalItemsPurchased=totalItemsPurchased totalShippingCost=totalShippingCost salesPerDay=salesPerDay}}
-      <div style="width:300px;height: 300px">
-        <canvas id="myChart" width="100%" height="100%"></canvas>
+      <div style="width:100%;height:100%;margin:auto">
+        <div style="display:inline-block;position:relative;width:30%;height:30%">
+          <canvas id="sales" width="100%" height="100%" style="display:inline-block;position:relative"></canvas>
+        </div>
+        <div style="display:inline-block;position:relative;width:30%;height:30%">
+          <canvas id="orders" width="100%" height="100%" style="display:inline-block;position:relative"></canvas>
+        </div>
       </div>
     </div>
     <div id="menu2" class="tab-pane fade">
@@ -38,10 +43,17 @@
     </div>
   </div>
   <script>
+
     productArray = [];
     quantity = [];
     productEarnerArray = [];
     totalSalesArray = [];
+
+    placed = document.getElementById('ordersPlaced').innerHTML;
+    cancelled = document.getElementById('ordersCancelled').innerHTML;
+    Tsales = document.getElementById("totalSales").innerHTML.slice(1).replace(/[,]/g, '');
+    persales = document.getElementById("salesPerDay").innerHTML.slice(1).replace(/[,]/g, '');
+
     $('.productName').each(function(i,obj) {
       productArray.push(obj.innerHTML);
     });
@@ -51,9 +63,12 @@
     $('.productEarnerName').each(function(i,obj) {
       productEarnerArray.push(obj.innerHTML);
     });
-    $('.totalSales').each(function(i,obj) {
-      totalSalesArray.push(obj.innerHTML.slice(1));
+    $('.totalSalesEarner').each(function(i,obj) {
+      totalSalesArray.push(obj.innerHTML.slice(1).replace(/[,]/g, ''));
     });
+    var ctxbar1 = document.getElementById("sales");
+    var ctxbar2 = document.getElementById("orders");
+
     var ctxPie = document.getElementById("myPie");
     var ctxEarnerPie = document.getElementById("myEarnerPie");
     var myPie = new Chart(ctxPie, {
@@ -143,6 +158,79 @@
         }
     });
 
+    var sales = new Chart(ctxbar1, {
+      type: 'bar',
+      data: {
+          labels: ["Total Sale", "Sales per day"],
+          datasets: [{
+              label: '# of Votes',
+              data: [Tsales, persales],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255,99,132,1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+    });
+    var orders = new Chart(ctxbar2, {
+      type: 'bar',
+      data: {
+          labels: ["Orders placed", "Orders cancelled"],
+          datasets: [{
+              label: '# of Votes',
+              data: [placed, cancelled],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255,99,132,1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+
   </script>
 </template>
 
@@ -151,16 +239,16 @@
     <h2>Performance Analytics Overview</h2>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <h4>Total Sales: <strong>{{totalSales}}</strong></h4>
+        <h4>Total Sales: <strong id="totalSales">{{totalSales}}</strong></h4>
       </li>
       <li class="list-group-item">
-        <h4>Average Daily Sales: <strong>{{salesPerDay}}</strong></h4>
+        <h4>Average Daily Sales: <strong id="salesPerDay">{{salesPerDay}}</strong></h4>
       </li>
       <li class="list-group-item">
-        <h4>Total Orders Placed: <strong>{{ordersPlaced}}</strong></h4>
+        <h4>Total Orders Placed: <strong id="ordersPlaced">{{ordersPlaced}}</strong></h4>
       </li>
       <li class="list-group-item">
-        <h4>Total Orders Cancelled: <strong>{{ordersCancelled}}</strong></h4>
+        <h4>Total Orders Cancelled: <strong id="ordersCancelled">{{ordersCancelled}}</strong></h4>
       </li>
       <li class="list-group-item">
         <h4>Total Items Sold: <strong>{{totalItemsPurchased}}</strong></h4>
@@ -217,7 +305,7 @@
         {{#each topEarning}}
         <tr>
           <td class="productEarnerName">{{product}}</td>
-          <td class="totalSales">{{totalSales}}</td>
+          <td class="totalSalesEarner">{{totalSales}}</td>
         </tr>
         {{/each}}
       </tbody>
